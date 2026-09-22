@@ -1,7 +1,17 @@
 import os
+import sys
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from pypdf import PdfReader
+
+# የአማርኛ (UTF-8) ፊደላትን ሲስተሙ እንዳያበላሸው encoding ማስተካከያ
+if sys.platform.startswith("win"):
+    import _thread
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 
 
 def start_counting():
@@ -66,10 +76,10 @@ tk.Label(
 ).pack(pady=10)
 
 frame = tk.Frame(root)
-frame.pack(pady=10, fill="x", px=20)
+frame.pack(pady=10, fill="x", padx=20)
 
 folder_entry = tk.Entry(frame, width=38, font=("Helvetica", 10))
-folder_entry.pack(side=tk.LEFT, px=5)
+folder_entry.pack(side=tk.LEFT, padx=5)
 
 btn_browse = tk.Button(
     frame, text="Browse...", command=browse_folder, bg="#e1e1e1"
