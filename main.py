@@ -1,7 +1,6 @@
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from tkinter import ttk
 from pypdf import PdfReader
 
 
@@ -11,7 +10,6 @@ def start_counting():
         messagebox.showerror("ስህተት", "እባክዎን ትክክለኛ የፎልደር አድራሻ ይምረጡ!")
         return
 
-    # ቁልፎቹን ለአፍታ ማገድ
     btn_count.config(state=tk.DISABLED)
     btn_browse.config(state=tk.DISABLED)
     status_label.config(text="እየቆጠረ ነው... እባክዎን ትንሽ ይጠብቁ...")
@@ -34,7 +32,6 @@ def start_counting():
             except Exception:
                 corrupted_count += 1
 
-        # ውጤቱን በስክሪኑ ላይ ማሳየት
         result_text = f"✅ ስራው ተጠናቋል!\n\n"
         result_text += f"▪ የተቆጠሩ PDF ፋይሎች: {pdf_count}\n"
         result_text += f"▪ ጠቅላላ የገጽ ብዛት: {total_pages} ገጾች\n"
@@ -59,10 +56,9 @@ def browse_folder():
         folder_entry.insert(0, selected_dir)
 
 
-# GUI ማዘጋጀት
 root = tk.Tk()
 root.title("PDF Page Counter")
-root.geometry("500x320")
+root.geometry("480x300")
 root.resizable(False, False)
 
 tk.Label(
@@ -72,7 +68,7 @@ tk.Label(
 frame = tk.Frame(root)
 frame.pack(pady=10, fill="x", px=20)
 
-folder_entry = tk.Entry(frame, width=40, font=("Helvetica", 10))
+folder_entry = tk.Entry(frame, width=38, font=("Helvetica", 10))
 folder_entry.pack(side=tk.LEFT, px=5)
 
 btn_browse = tk.Button(
@@ -83,7 +79,7 @@ btn_browse.pack(side=tk.LEFT)
 btn_count = tk.Button(
     root,
     text="ገጾችን ቆጥር (Calculate Pages)",
-    command=start_count,
+    command=start_counting,
     bg="#4CAF50",
     fg="white",
     font=("Helvetica", 11, "bold"),
